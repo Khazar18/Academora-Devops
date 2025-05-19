@@ -23,10 +23,3 @@ dist-ssr
 *.sln
 
 .env
-
-frontend/.gitignore
-frontend/.env
-frontend/src/assets/updated_universities.json
-frontend/src/assets/all_countries.json
-frontend/node_modules
-
