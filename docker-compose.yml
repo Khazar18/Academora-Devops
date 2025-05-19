@@ -1,0 +1,56 @@
+version: '3.8'
+
+services:
+  backend:
+    build:
+      context: ./server
+      dockerfile: Dockerfile.backend
+
+    container_name: Academora
+
+    ports:
+      - "3000:3000"
+
+    env_file:
+      - .env
+
+    environment:
+      - NODE_ENV=production
+      - PORT=3000
+      - MONGO_URI=mongodb+srv://konanoma777:TBNRFRAGS777@cluster0.osqqd4w.mongodb.net/
+
+
+    volumes:
+      - ./backend:/app
+
+    networks:
+      - Academora-network
+
+
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile.frontend
+
+    container_name: Academora-network-frontend
+
+    ports:
+      - "5000:5000"
+
+    env_file:
+      - .env
+
+    environment:
+      - NODE_ENV=production
+      - PORT=5000
+
+    depends_on:
+      - backend
+      
+    networks:
+      - Academora-network
+
+networks:
+  Academora-network:
+    driver: bridge
