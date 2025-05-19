@@ -1,16 +1,18 @@
-# Stage 1: Build
-FROM node:20-alpine AS builder
-WORKDIR /app
-COPY package*.json ./
-RUN npm install
-COPY . .
-RUN NODE_OPTIONS="--max-old-space-size=1024" npm run build
-
-# Stage 2: Serve
+# Serve the pre-built frontend
 FROM node:20-alpine
+
+# Install serve globally to serve the build
 RUN npm install -g serve
+
+# Set working directory
 WORKDIR /app
-COPY --from=builder /app/dist ./dist
+
+# Copy the local pre-built dist directory into the container
+COPY dist ./dist
+
+# Set environment and expose port
 ENV PORT=5000
 EXPOSE 5000
+
+# Run the app with serve
 CMD ["serve", "-s", "dist", "-l", "5000"]
