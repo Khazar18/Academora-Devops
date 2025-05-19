@@ -6,7 +6,7 @@ import Overview from '../universityDetail/overview/overview';
 import Courses from '../universityDetail/courses/courses';
 import Societies from '../universityDetail/joinSocieties/joinSocieties';
 import StudyCircles from '../universityDetail/studyCircles/studyCircle';
-import './UniversityDetail.css';
+import './universityDetail.css';
 import universityData from '../../assets/updated_universities.json';
 
 export default function UniversityDetail() {
