@@ -6,7 +6,6 @@ RUN npm install
 COPY . .
 RUN NODE_OPTIONS="--max-old-space-size=1024" npm run build
 
-
 # Stage 2: Serve
 FROM node:20-alpine
 RUN npm install -g serve

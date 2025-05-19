@@ -3,54 +3,28 @@ version: '3.8'
 services:
   backend:
     build:
-      context: ./server
-      dockerfile: Dockerfile.backend
-
-    container_name: Academora
-
+      context: ./backend
+    container_name: mern_backend
     ports:
-      - "3000:3000"
-
-    env_file:
-      - .env
-
+      - "5000:5000"
     environment:
       - NODE_ENV=production
-      - PORT=3000
-      - MONGO_URI=mongodb+srv://konanoma777:TBNRFRAGS777@cluster0.osqqd4w.mongodb.net/
-
-
-    volumes:
-      - ./backend:/app
-
+      - MONGO_URI=mongodb+srv://konanoma777:TBNRFRAGS777@cluster0.osqqd4w.mongodb.net/Devops?retryWrites=true&w=majority&appName=Cluster0
+      - JWT_SECRET="Asjadkhazar"
     networks:
-      - Academora-network
-
-
+      - mern-network
 
   frontend:
     build:
       context: ./frontend
-      dockerfile: Dockerfile.frontend
-
-    container_name: Academora-network-frontend
-
+    container_name: mern_frontend
     ports:
-      - "5000:5000"
-
-    env_file:
-      - .env
-
-    environment:
-      - NODE_ENV=production
-      - PORT=5000
-
+      - "3000:3000"
     depends_on:
       - backend
-      
     networks:
-      - Academora-network
+      - mern-network
 
 networks:
-  Academora-network:
+  mern-network:
     driver: bridge
